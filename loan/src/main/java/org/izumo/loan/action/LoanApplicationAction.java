@@ -13,7 +13,7 @@ public class LoanApplicationAction {
     private LoanApplicationService service;
 
     @RequestMapping("save-by-excel")
-    public void read() {
-        this.service.saveByExcel("");
+    public void read(String filePath) {
+        this.service.saveByExcel(filePath);
     }
 }
