@@ -12,16 +12,11 @@ public abstract class ExcelImportUtil {
         if (null == filePath || filePath.isEmpty()) {
             return;
         }
-        String[] fileTypes = filePath.split(".");
-        String fileType = null;
-        if (fileTypes == null || fileTypes.length < 1) {
-            return;
-        }
-        fileType = fileTypes[fileTypes.length - 1];
-        if (fileType.equals("xls")) {
-            this.readXls(filePath);
-        } else if (fileType.equals("xlsx")) {
+
+        if (filePath.endsWith("xlsx")) {
             this.readXlsx(filePath);
+        } else if (filePath.endsWith("xls")) {
+            this.readXls(filePath);
         } else {
             System.out.println("您输入的excel格式不正确");
         }
