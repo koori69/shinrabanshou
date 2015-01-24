@@ -8,11 +8,20 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 public abstract class ExcelImportUtil {
-    public void readExcel(String path, String fileName, String fileType) {
+    public void readExcel(String filePath) {
+        if (null == filePath || filePath.isEmpty()) {
+            return;
+        }
+        String[] fileTypes = filePath.split(".");
+        String fileType = null;
+        if (fileTypes == null || fileTypes.length < 1) {
+            return;
+        }
+        fileType = fileTypes[fileTypes.length - 1];
         if (fileType.equals("xls")) {
-            this.readXls(path + fileName + "." + fileType);
+            this.readXls(filePath);
         } else if (fileType.equals("xlsx")) {
-            this.readXlsx(path + fileName + "." + fileType);
+            this.readXlsx(filePath);
         } else {
             System.out.println("您输入的excel格式不正确");
         }
