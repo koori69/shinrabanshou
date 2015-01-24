@@ -32,6 +32,9 @@
 				<property name="ignoreUnknownProperties" value="true" />
 			</bean>
 		</mvc:message-converters>
+        <mvc:argument-resolvers>
+            <bean class="org.izumo.core.web.argument.JsonMapperArgumentResolver"></bean>
+        </mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
 </beans>

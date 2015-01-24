@@ -16,4 +16,9 @@ public class LoanApplicationAction {
     public boolean read(String filePath) {
         return this.service.saveByExcel(filePath);
     }
+
+    @RequestMapping("test")
+    public String test() {
+        return "Hi MongoDB";
+    }
 }
