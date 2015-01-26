@@ -19,7 +19,6 @@ public class LoanApplicationAction {
 
     @RequestMapping("test")
     public String test() {
-        this.service.saveByExcel("D:/个人借款申请表_终极备份6.xls");
         return "Hi MongoDB";
     }
 }
