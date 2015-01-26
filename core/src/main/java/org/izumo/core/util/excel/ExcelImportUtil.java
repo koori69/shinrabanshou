@@ -1,8 +1,12 @@
 package org.izumo.core.util.excel;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -35,7 +39,13 @@ public abstract class ExcelImportUtil {
         if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
             return String.valueOf(hssfCell.getBooleanCellValue());
         } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
-            return String.valueOf((int) hssfCell.getNumericCellValue());
+            if (HSSFDateUtil.isCellDateFormatted(hssfCell)) {
+                Date d = hssfCell.getDateCellValue();
+                DateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
+                return formater.format(d);
+            } else {
+                return String.valueOf((long) hssfCell.getNumericCellValue());
+            }
         } else {
             return String.valueOf(hssfCell.getStringCellValue());
         }
