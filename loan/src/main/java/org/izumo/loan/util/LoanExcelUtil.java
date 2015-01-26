@@ -53,7 +53,7 @@ public class LoanExcelUtil extends ExcelImportUtil {
                 this.obj.setCreateTime(new Date());
 
                 // 循环工作表Sheet
-                for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); ++numSheet) {
+                for (int numSheet = 0; numSheet < 1; ++numSheet) {
                     HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
                     if (hssfSheet == null) {
                         continue;
@@ -73,9 +73,9 @@ public class LoanExcelUtil extends ExcelImportUtil {
                             if (hssfCell == null) {
                                 continue;
                             }
-                            if (this.getValue(hssfCell) != null && !this.getValue(hssfCell).isEmpty()) {
-                                this.setObj(rowNum, cellNum, this.getValue(hssfCell));
-                            }
+
+                            this.setObj(rowNum, cellNum, this.getValue(hssfCell));
+
                         }
                     }
                 }
@@ -94,12 +94,14 @@ public class LoanExcelUtil extends ExcelImportUtil {
         try {
             stream = new FileInputStream(path);
             this.obj = new LoanApplication();
+            this.obj.setCreateTime(new Date());
+
             XSSFWorkbook xssfWorkbook;
             try {
                 xssfWorkbook = new XSSFWorkbook(stream);
 
                 // 循环工作表Sheet
-                for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); ++numSheet) {
+                for (int numSheet = 0; numSheet < 1; ++numSheet) {
                     XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
                     if (xssfSheet == null) {
                         continue;
@@ -107,7 +109,6 @@ public class LoanExcelUtil extends ExcelImportUtil {
 
                     // 循环行Row
                     for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
-                        LoanApplication obj = new LoanApplication();
                         XSSFRow xssfRow = xssfSheet.getRow(rowNum);
                         if (xssfRow == null) {
                             continue;
@@ -119,9 +120,9 @@ public class LoanExcelUtil extends ExcelImportUtil {
                             if (xssfCell == null) {
                                 continue;
                             }
-                            if (xssfCell.getStringCellValue() != null && !xssfCell.getStringCellValue().isEmpty()) {
-                                this.setObj(rowNum, cellNum, this.getValue(xssfCell));
-                            }
+
+                            this.setObj(rowNum, cellNum, this.getValue(xssfCell));
+
                         }
                     }
                 }
