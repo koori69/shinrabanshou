@@ -1,5 +1,6 @@
 package org.izumo.loan.mongo.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import org.izumo.loan.mongo.entity.bean.FamilyInformation;
@@ -86,6 +87,11 @@ public class LoanApplication {
     private String career;
 
     /**
+     * 抵押物
+     */
+    private String pawn;
+
+    /**
      * 家庭成员信息
      */
     private List<FamilyInformation> familyInformation;
@@ -109,6 +115,11 @@ public class LoanApplication {
      * 经手人
      */
     private String handledBy;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
     public LoanApplication() {
 
@@ -293,5 +304,21 @@ public class LoanApplication {
 
     public void setInterestPeriod(String interestPeriod) {
         this.interestPeriod = interestPeriod;
+    }
+
+    public String getPawn() {
+        return this.pawn;
+    }
+
+    public void setPawn(String pawn) {
+        this.pawn = pawn;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

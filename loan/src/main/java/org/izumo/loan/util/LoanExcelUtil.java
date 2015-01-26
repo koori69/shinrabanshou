@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class LoanExcelUtil extends ExcelImportUtil {
             try {
                 hssfWorkbook = new HSSFWorkbook(is);
                 this.obj = new LoanApplication();
+                this.obj.setCreateTime(new Date());
 
                 // 循环工作表Sheet
                 for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); ++numSheet) {
@@ -71,7 +73,7 @@ public class LoanExcelUtil extends ExcelImportUtil {
                             if (hssfCell == null) {
                                 continue;
                             }
-                            if (hssfCell.getStringCellValue() != null && !hssfCell.getStringCellValue().isEmpty()) {
+                            if (this.getValue(hssfCell) != null && !this.getValue(hssfCell).isEmpty()) {
                                 this.setObj(rowNum, cellNum, this.getValue(hssfCell));
                             }
                         }
@@ -245,6 +247,9 @@ public class LoanExcelUtil extends ExcelImportUtil {
         case 6:
             if (j == 2) {
                 this.obj.setCareer(value);
+            }
+            if (j == 10) {
+                this.obj.setPawn(value);
             }
             break;
         case 8: {
