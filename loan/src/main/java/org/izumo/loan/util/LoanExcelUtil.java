@@ -73,7 +73,6 @@ public class LoanExcelUtil extends ExcelImportUtil {
                             if (hssfCell == null) {
                                 continue;
                             }
-
                             this.setObj(rowNum, cellNum, this.getValue(hssfCell));
 
                         }
@@ -452,6 +451,9 @@ public class LoanExcelUtil extends ExcelImportUtil {
             {
                 switch (j) {
                 case 2:
+                    userInformation.setPermanentAddress(value);
+                    break;
+                case 10:
                     userInformation.setIdNumber(value);
                     break;
                 default:
@@ -695,6 +697,9 @@ public class LoanExcelUtil extends ExcelImportUtil {
             {
                 switch (j) {
                 case 2:
+                    userInformation.setPermanentAddress(value);
+                    break;
+                case 10:
                     userInformation.setIdNumber(value);
                     break;
                 default:
