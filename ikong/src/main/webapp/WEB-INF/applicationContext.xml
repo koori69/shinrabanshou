@@ -12,6 +12,36 @@
        http://www.springframework.org/schema/data/mongo 
        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
        ">
-    <context:component-scan base-package="org.izumo.ikong.service" />
+    <context:component-scan base-package="org.izumo.ikong.spider.service,org.izumo.ikong.mongo" />
     
+    <!-- Default bean name is 'mongo' -->
+    <mongo:mongo host="${mongo.ip}" port="${mongo.port}" />
+    
+    <!-- mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 -->
+    <mongo:db-factory dbname="${mongo.db}" mongo-ref="mongo" />
+ 
+    <!-- mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成 -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+      <!-- 去掉默认插入时的 _class 属性 -->
+        <!-- <constructor-arg name="mongoConverter" ref="noClassMappingMongoConverter" /> -->
+    </bean>
+     
+    <!-- 映射转换器，扫描back-package目录下的文件，根据注释，把它们作为mongodb的一个collection的映射 -->
+    <mongo:mapping-converter base-package="org.izumo.ikong.mongo.entity" />
+     
+    <!-- mongodb bean的仓库目录，会自动扫描扩展了MongoRepository接口的接口进行注入 -->
+    <mongo:repositories base-package="org.izumo.ikong.mongo.dao" />
+
+    <context:property-placeholder location="classpath*:properties/mongo.properties" ignore-unresolvable="false" />
+
+
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:properties/mongo.properties</value>
+                <value>classpath:properties/param.properties</value>
+            </list>
+        </property>
+    </bean>
 </beans>  

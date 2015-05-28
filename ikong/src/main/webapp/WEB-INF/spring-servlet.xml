@@ -18,7 +18,7 @@
 	http://www.springframework.org/schema/mvc 
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="org.izumo.ikong.action" />
+	<context:component-scan base-package="org.izumo.ikong.spider.action" />
 	<!-- <mvc:annotation-driven/>  -->
     <!-- 支持对静态资源文件的访问 -->
     <mvc:default-servlet-handler/>  
